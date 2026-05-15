@@ -24,7 +24,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
 
           script: |
-            cd ~/board-app-github-actions-v1
+            cd ~/board-app-github-actions
             git pull origin main
             docker compose down
             docker compose build --no-cache  # 엄청 오래걸림 너무 오래 걸리면 아래 백업용 으로 하기

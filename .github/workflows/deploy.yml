@@ -1,0 +1,24 @@
+name: Deploy to EC2 # workflow 의 이름
+
+on: # trigger
+  push:
+    branches: [main] # main 브랜치에 push될 때 자동 실행
+
+jobs: # job 은 1개 이상의 job 으로 구성됨. job 이 여러개인경우 병렬구조로 동작된다.
+  deploy: # 이 부분의 이름은 내 마음대로. job 의 고유 id 라고 생각하면 됨
+    # github 에서 레포지토리 -> actions 탭 들어가면 표시되는 이름
+    runs-on: ubuntu-latest # GitHub이 제공하는 가상 컴퓨터에서 실행
+
+    steps: # 작업을 수행하는 가장 작은 단위
+      - name: 배포 성공
+        if: success()
+        run: echo "배포 완료!"
+
+      - name: 배포 실패
+        if: failure()
+        run: echo "배포 실패! 로그를 확인하세요." # SSH로 EC2에 접속해서 명령어 실행
+
+      - name: 명령어 여러개 한번에 사용할 경우
+        run: | # run 에 | 해주면 됨
+          echo "Hellow"
+          echo "World"

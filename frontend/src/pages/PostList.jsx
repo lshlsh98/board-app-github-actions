@@ -68,22 +68,31 @@ export default function PostList() {
       </div>
 
       {/* 검색 */}
-      {/* <form onSubmit={handleSearch} className="search-bar">
+      <form onSubmit={handleSearch} className="search-bar">
         <input
           type="text"
           className="form-input search-input"
           placeholder="제목 또는 내용으로 검색..."
           value={searchInput}
-          onChange={e => setSearchInput(e.target.value)}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button type="submit" className="btn btn-primary">검색</button>
+        <button type="submit" className="btn btn-primary">
+          검색
+        </button>
         {keyword && (
-          <button type="button" className="btn btn-outline"
-            onClick={() => { setSearchInput(''); setKeyword(''); setPage(0) }}>
+          <button
+            type="button"
+            className="btn btn-outline"
+            onClick={() => {
+              setSearchInput("");
+              setKeyword("");
+              setPage(0);
+            }}
+          >
             초기화
           </button>
         )}
-      </form> */}
+      </form>
 
       {/* 게시글 목록 */}
       {loading ? (

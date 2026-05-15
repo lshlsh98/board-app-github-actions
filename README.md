@@ -2,9 +2,13 @@
 
 React + Spring Boot + MySQL 풀스택 게시판 애플리케이션
 
+## Github Action 추가하는 프로젝트
+
+.github > workflows > deploy.yml 추가
+
 ---
 
-## 🏗️ 프로젝트 구조 
+## 🏗️ 프로젝트 구조
 
 ```
 board-app/
@@ -83,27 +87,27 @@ docker-compose up -d --build
 
 ## 🔑 테스트 계정
 
-| 아이디 | 비밀번호 | 권한 |
-|--------|----------|------|
-| admin | password123 | 관리자 |
-| user1 | password123 | 일반 사용자 |
-| user2 | password123 | 일반 사용자 |
+| 아이디 | 비밀번호    | 권한        |
+| ------ | ----------- | ----------- |
+| admin  | password123 | 관리자      |
+| user1  | password123 | 일반 사용자 |
+| user2  | password123 | 일반 사용자 |
 
 ---
 
 ## 📡 API 엔드포인트
 
-| Method | URL | 인증 | 설명 |
-|--------|-----|------|------|
-| POST | /api/auth/login | ❌ | 로그인 |
-| POST | /api/auth/register | ❌ | 회원가입 |
-| GET | /api/posts | ❌ | 게시글 목록 (페이징, 검색) |
-| GET | /api/posts/{id} | ❌ | 게시글 상세 |
-| POST | /api/posts | ✅ | 게시글 작성 |
-| PUT | /api/posts/{id} | ✅ | 게시글 수정 (작성자) |
-| DELETE | /api/posts/{id} | ✅ | 게시글 삭제 (작성자/관리자) |
-| POST | /api/posts/{id}/comments | ✅ | 댓글 작성 |
-| DELETE | /api/posts/comments/{id} | ✅ | 댓글 삭제 (작성자/관리자) |
+| Method | URL                      | 인증 | 설명                        |
+| ------ | ------------------------ | ---- | --------------------------- |
+| POST   | /api/auth/login          | ❌   | 로그인                      |
+| POST   | /api/auth/register       | ❌   | 회원가입                    |
+| GET    | /api/posts               | ❌   | 게시글 목록 (페이징, 검색)  |
+| GET    | /api/posts/{id}          | ❌   | 게시글 상세                 |
+| POST   | /api/posts               | ✅   | 게시글 작성                 |
+| PUT    | /api/posts/{id}          | ✅   | 게시글 수정 (작성자)        |
+| DELETE | /api/posts/{id}          | ✅   | 게시글 삭제 (작성자/관리자) |
+| POST   | /api/posts/{id}/comments | ✅   | 댓글 작성                   |
+| DELETE | /api/posts/comments/{id} | ✅   | 댓글 삭제 (작성자/관리자)   |
 
 ---
 
@@ -151,4 +155,5 @@ docker-compose build --no-cache
 ```
 
 모든 컨테이너는 `board-network` 브리지 네트워크로 통신합니다.
+
 #

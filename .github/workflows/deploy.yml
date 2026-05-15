@@ -1,3 +1,8 @@
+# Secrets에 저장한 값:
+# EC2_HOST = 13.125.92.241
+# EC2_USERNAME = ubuntu
+# EC2_KEY = (pem 파일 내용)
+
 name: Deploy to EC2 # workflow 의 이름
 
 on: # trigger
@@ -9,20 +14,7 @@ jobs: # job 은 1개 이상의 job 으로 구성됨. job 이 여러개인경우 
     # github 에서 레포지토리 -> actions 탭 들어가면 표시되는 이름
     runs-on: ubuntu-latest # GitHub이 제공하는 가상 컴퓨터에서 실행
 
-    steps: # 작업을 수행하는 가장 작은 단위
-      - name: 배포 성공
-        if: success()
-        run: echo "배포 완료!"
-
-      - name: 배포 실패
-        if: failure()
-        run: echo "배포 실패! 로그를 확인하세요." # SSH로 EC2에 접속해서 명령어 실행
-
-      - name: 명령어 여러개 한번에 사용할 경우
-        run: | # run 에 | 해주면 됨
-          echo "Hello"
-          echo "World"
-
+    steps:
       - name: EC2 접속
         uses: appleboy/ssh-action@v1
         with:
@@ -35,3 +27,13 @@ jobs: # job 은 1개 이상의 job 으로 구성됨. job 이 여러개인경우 
             docker compose pull
             docker compose up -d
             docker image prune -f
+
+#######################################################
+##########  이건 보험임. 일단 안해도 됨 #############
+# script: |    # 실제 코드 수정하는 부분
+#   cd ~/board-app-github-actions-v1
+#   git pull origin main
+#   docker compose down
+#   docker compose build --no-cache
+#   docker compose up -d
+#   docker image prune -f

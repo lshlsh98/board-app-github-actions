@@ -1,39 +1,32 @@
-# Secrets에 저장한 값:
-# EC2_HOST = 13.125.92.241
-# EC2_USERNAME = ubuntu
-# EC2_KEY = (pem 파일 내용)
+name: Deploy to EC2 # GitHub Actions 탭에서 표시되는 workflow 이름
 
-name: Deploy to EC2 # workflow 의 이름
-
-on: # trigger
+on:
   push:
-    branches: [main] # main 브랜치에 push될 때 자동 실행
+    branches:
+      [main] # main 브랜치에 push될 때마다 자동 실행
+      # 다른 브랜치 push에서는 실행 안 됨
 
-jobs: # job 은 1개 이상의 job 으로 구성됨. job 이 여러개인경우 병렬구조로 동작된다.
-  deploy: # 이 부분의 이름은 내 마음대로. job 의 고유 id 라고 생각하면 됨
-    # github 에서 레포지토리 -> actions 탭 들어가면 표시되는 이름
-    runs-on: ubuntu-latest # GitHub이 제공하는 가상 컴퓨터에서 실행
+jobs:
+  deploy:
+    runs-on:
+      ubuntu-latest # GitHub가 제공하는 Ubuntu 가상머신에서 실행
+      # 이 가상머신이 EC2에 SSH 접속해서 명령어를 실행함
 
     steps:
-      - name: EC2 접속
-        uses: appleboy/ssh-action@v1
+      - name: SSH로 EC2에 접속하여 배포
+        uses:
+          appleboy/ssh-action@master # 외부 Action 사용
+          # SSH 접속을 쉽게 처리해주는 커뮤니티 라이브러리
+          # 덕분에 복잡한 SSH 설정 없이 바로 접속 가능
         with:
-          host: ${{ secrets.EC2_HOST }} # → 13.125.92.241
-          username: ${{ secrets.EC2_USERNAME }} # → ubuntu
-          key: ${{ secrets.EC2_KEY }} # → pem 내용
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
 
-          script: | # 실제 코드 수정하는 부분
+          script: |
             cd ~/board-app-github-actions-v1
-            docker compose pull
+            git pull origin main
+            docker compose down
+            docker compose build --no-cache  # 엄청 오래걸림 너무 오래 걸리면 아래 백업용 으로 하기
             docker compose up -d
             docker image prune -f
-
-#######################################################
-##########  이건 보험임. 일단 안해도 됨 #############
-# script: |    # 실제 코드 수정하는 부분
-#   cd ~/board-app-github-actions-v1
-#   git pull origin main
-#   docker compose down
-#   docker compose build --no-cache
-#   docker compose up -d
-#   docker image prune -f

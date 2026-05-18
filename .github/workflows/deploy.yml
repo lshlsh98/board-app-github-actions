@@ -114,7 +114,9 @@ jobs:
           # steps.login-ecr.outputs.registry 참조 불가 → AWS_ACCOUNT_ID Secret 사용
           script: |
             cd ~/board-app-github-actions
-            docker compose pull
+            git pull origin main
+            docker compose down
+            docker compose build --no-cache  # 엄청 오래걸림 너무 오래 걸리면 아래 백업용 으로 하기
             docker compose up -d
             docker image prune -f
 

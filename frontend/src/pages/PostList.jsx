@@ -68,7 +68,7 @@ export default function PostList() {
       </div>
 
       {/* 검색 */}
-      {/* <form onSubmit={handleSearch} className="search-bar">
+      <form onSubmit={handleSearch} className="search-bar">
         <input
           type="text"
           className="form-input search-input"
@@ -92,7 +92,7 @@ export default function PostList() {
             초기화
           </button>
         )}
-      </form> */}
+      </form>
 
       {/* 게시글 목록 */}
       {loading ? (

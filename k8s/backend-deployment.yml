@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: database-1.crwu8iacm9eh.ap-northeast-2.rds.amazonaws.com
-          imagePullPolicy: Always
+          image: 655738707598.dkr.ecr.ap-northeast-2.amazonaws.com/board-app-github-actions-backend:latest
+          # imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:

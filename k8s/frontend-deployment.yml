@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: 748009207806.dkr.ecr.ap-northeast-2.amazonaws.com/board-app-github-actions-frontend:latest
-          imagePullPolicy: Always
+          image: 655738707598.dkr.ecr.ap-northeast-2.amazonaws.com/board-app-github-actions-frontend:latest
+          # imagePullPolicy: Always
           ports:
             - containerPort: 80

@@ -52,7 +52,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           source: "k8s/"
-          target: "~/"
+          target: "~/board-app-github-actions/"
 
       - name: EC2에 SSH 접속하여 배포
         uses: appleboy/ssh-action@master
@@ -66,12 +66,12 @@ jobs:
             # k3s 기본 kubeconfig는 root 전용(/etc/rancher/k3s/k3s.yaml)이라
             # ubuntu 사용자용 ~/.kube/config를 명시적으로 지정해야 함
 
-            kubectl apply -f ~/k8s/backend-configmap.yml
-            kubectl apply -f ~/k8s/backend-secret.yml
-            kubectl apply -f ~/k8s/backend-deployment.yml
-            kubectl apply -f ~/k8s/backend-service.yml
-            kubectl apply -f ~/k8s/frontend-deployment.yml
-            kubectl apply -f ~/k8s/frontend-service.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/backend-configmap.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/backend-secret.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/backend-deployment.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/backend-service.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/frontend-deployment.yml
+            kubectl apply -f ~/board-app-github-actions/k8s/frontend-service.yml
             kubectl rollout restart deployment/backend-deployment
             kubectl rollout restart deployment/frontend-deployment
 

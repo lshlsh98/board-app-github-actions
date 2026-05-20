@@ -1,0 +1,11 @@
+# backend-configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  DB_HOST: "database-1.crwu8iacm9eh.ap-northeast-2.rds.amazonaws.com"
+  DB_PORT: "3306"
+  DB_NAME: "boarddb"
+  AWS_REGION: "ap-northeast-2"
+  S3_BUCKET: "my-s3-leesh-prac" # 이번에 버킷 이름 바꿔서 잘 가져와야 함

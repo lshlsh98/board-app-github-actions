@@ -77,7 +77,8 @@ jobs:
 
       - name: 배포 성공 알림
         if: success()
-        run: echo "배포 성공! 커밋: ${{ github.sha }}"
+        run: |
+          echo "배포 성공! 커밋: ${{ github.sha }}"
 
       - name: 배포 실패 알림
         if: failure()

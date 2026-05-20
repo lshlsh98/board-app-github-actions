@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: backend-config
 data:
-  DB_HOST: "655738707598.dkr.ecr.ap-northeast-2.amazonaws.com/board-app-github-actions-backend"
+  DB_HOST: "database-1.crwu8iacm9eh.ap-northeast-2.rds.amazonaws.com"
   DB_PORT: "3306"
   DB_NAME: "boarddb"
   AWS_REGION: "ap-northeast-2"
